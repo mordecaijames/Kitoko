@@ -482,6 +482,25 @@ select option{ background: var(--char); color: var(--cream); }
 }
 @keyframes spin{ to{ transform: rotate(360deg); } }
 
+/* ---------- site credit ---------- */
+
+.site-credit{
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px 16px 28px;
+  font-size: 0.78rem;
+  color: var(--bronze);
+  letter-spacing: 0.04em;
+}
+.site-credit a{
+  color: var(--ember);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+.site-credit a:hover{ color: var(--ember-bright); }
+
 /* ---------- responsive ---------- */
 
 /* base mobile-first tightening — applies to everything narrower than tablet */
