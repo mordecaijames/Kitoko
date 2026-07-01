@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitoko Hearth — Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader">
+  <svg viewBox="0 0 60 60" class="flame-icon preloader-flame">
+    <path d="M30 4C26 16 14 20 14 36C14 47 21 56 30 56C39 56 46 47 46 36C46 28 42 24 39 20C39 28 34 30 32 26C30 22 33 16 30 4Z" />
+  </svg>
+  <p class="preloader-text">Lighting the hearth…</p>
+</div>
+
+<canvas id="emberCanvas"></canvas>
+
+<div class="grain"></div>
+
+<!-- ============ INTRO SCREEN ============ -->
+<section class="intro" id="introScreen">
+  <div class="intro-mark">
+    <svg viewBox="0 0 60 60" class="flame-icon">
+      <path d="M30 4C26 16 14 20 14 36C14 47 21 56 30 56C39 56 46 47 46 36C46 28 42 24 39 20C39 28 34 30 32 26C30 22 33 16 30 4Z" />
+    </svg>
+  </div>
+  <p class="eyebrow">Kitoko Hearth Cohort Registration</p>
+  <h1 class="intro-title">A small fire,<br>a place to begin.</h1>
+  <p class="intro-copy">Kitoko Hearth is a 4‑week gathering for people who want to build with technology — design, code, AI, and the businesses around them. Tell us who you are, and we'll save you a seat by the fire.</p>
+  <button class="btn-primary" id="startBtn">Begin Registration <span class="arrow">→</span></button>
+  <p class="intro-meta">30 questions · about 10 minutes · your answers are saved as you go</p>
+</section>
+
+<!-- ============ FORM SCREEN ============ -->
+<section class="form-wrap" id="formScreen" hidden>
+
+  <header class="form-header">
+    <div class="brand">
+      <svg viewBox="0 0 60 60" class="flame-icon small">
+        <path d="M30 4C26 16 14 20 14 36C14 47 21 56 30 56C39 56 46 47 46 36C46 28 42 24 39 20C39 28 34 30 32 26C30 22 33 16 30 4Z" />
+      </svg>
+      <span>Kitoko Hearth</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="step-label"><span id="stepCurrent">1</span> / <span id="stepTotal">9</span></div>
+  </header>
+
+  <form id="regForm" autocomplete="off">
+
+    <!-- STEP 1 — Personal Information -->
+    <fieldset class="step active" data-step="1">
+      <p class="step-eyebrow">01 · Personal Information</p>
+      <h2 class="step-title">Let's start with the basics.</h2>
+
+      <label class="field">
+        <span class="field-label">Full Name <em>*</em></span>
+        <input type="text" name="fullName" required placeholder="e.g. Amara Chukwu">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Email Address <em>*</em></span>
+        <input type="email" name="email" required placeholder="you@email.com">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Phone Number (WhatsApp) <em>*</em></span>
+        <input type="tel" name="phone" required placeholder="+234 800 000 0000">
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Age <em>*</em></span>
+          <input type="number" name="age" min="10" max="100" required placeholder="e.g. 21">
+        </label>
+        <label class="field">
+          <span class="field-label">Gender <small>(optional)</small></span>
+          <select name="gender">
+            <option value="">Prefer not to say</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">City / State <em>*</em></span>
+          <input type="text" name="cityState" required placeholder="e.g. Kaduna">
+        </label>
+        <label class="field">
+          <span class="field-label">Country <em>*</em></span>
+          <input type="text" name="country" required placeholder="e.g. Nigeria" value="Nigeria">
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- STEP 2 — About You -->
+    <fieldset class="step" data-step="2">
+      <p class="step-eyebrow">02 · About You</p>
+      <h2 class="step-title">Where are you, right now?</h2>
+
+      <div class="field">
+        <span class="field-label">Are you currently: <em>*</em></span>
+        <div class="choice-grid" data-name="currentStatus">
+          <label class="choice"><input type="radio" name="currentStatus" value="Secondary School Student" required><span>Secondary School Student</span></label>
+          <label class="choice"><input type="radio" name="currentStatus" value="University Student"><span>University Student</span></label>
+          <label class="choice"><input type="radio" name="currentStatus" value="Graduate"><span>Graduate</span></label>
+          <label class="choice"><input type="radio" name="currentStatus" value="Employed"><span>Employed</span></label>
+          <label class="choice"><input type="radio" name="currentStatus" value="Self-Employed"><span>Self-Employed</span></label>
+          <label class="choice"><input type="radio" name="currentStatus" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">How did you hear about Kitoko Hearth? <em>*</em></span>
+        <div class="choice-grid" data-name="heardFrom">
+          <label class="choice"><input type="radio" name="heardFrom" value="Instagram" required><span>Instagram</span></label>
+          <label class="choice"><input type="radio" name="heardFrom" value="WhatsApp"><span>WhatsApp</span></label>
+          <label class="choice"><input type="radio" name="heardFrom" value="Friend"><span>Friend</span></label>
+          <label class="choice"><input type="radio" name="heardFrom" value="LinkedIn"><span>LinkedIn</span></label>
+          <label class="choice"><input type="radio" name="heardFrom" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Tell us a little about yourself. <em>*</em></span>
+        <textarea name="aboutYou" required rows="4" placeholder="Who are you, what do you spend your time doing?"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- STEP 3 — Technology Interests -->
+    <fieldset class="step" data-step="3">
+      <p class="step-eyebrow">03 · Technology Interests</p>
+      <h2 class="step-title">What draws you to tech?</h2>
+
+      <div class="field">
+        <span class="field-label">Have you learned any tech skill before? <em>*</em></span>
+        <div class="choice-grid two-col">
+          <label class="choice"><input type="radio" name="learnedSkillBefore" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="learnedSkillBefore" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">If yes, what skill(s) have you learned?</span>
+        <input type="text" name="skillsLearned" placeholder="e.g. HTML/CSS, Canva, Excel — leave blank if none">
+      </label>
+
+      <div class="field">
+        <span class="field-label">Which area interests you the most? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="interestArea" value="Product Design" required><span>Product Design</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="AI & Prompt Engineering"><span>AI &amp; Prompt Engineering</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Software Development"><span>Software Development</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Web Development"><span>Web Development</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Data Analysis"><span>Data Analysis</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Product Management"><span>Product Management</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Content Creation"><span>Content Creation</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Entrepreneurship"><span>Entrepreneurship</span></label>
+          <label class="choice"><input type="radio" name="interestArea" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Why does this area interest you? <em>*</em></span>
+        <textarea name="whyAreaInterest" required rows="4"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- STEP 4 — Goals & Motivation -->
+    <fieldset class="step" data-step="4">
+      <p class="step-eyebrow">04 · Goals &amp; Motivation</p>
+      <h2 class="step-title">What are you reaching for?</h2>
+
+      <label class="field">
+        <span class="field-label">Why do you want to join Kitoko Hearth? <em>*</em></span>
+        <textarea name="whyJoin" required rows="4"></textarea>
+      </label>
+
+      <label class="field">
+        <span class="field-label">What do you hope to achieve by the end of the program? <em>*</em></span>
+        <textarea name="goalEndOfProgram" required rows="4"></textarea>
+      </label>
+
+      <label class="field">
+        <span class="field-label">What is one problem you would love to solve using technology? <em>*</em></span>
+        <textarea name="problemToSolve" required rows="4"></textarea>
+      </label>
+
+      <label class="field">
+        <span class="field-label">If you could build any app, website, or digital product, what would it be? <em>*</em></span>
+        <textarea name="dreamProduct" required rows="4"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- STEP 5 — Learning Resources -->
+    <fieldset class="step" data-step="5">
+      <p class="step-eyebrow">05 · Learning Resources</p>
+      <h2 class="step-title">What's in your toolkit?</h2>
+
+      <div class="field">
+        <span class="field-label">Do you have access to a laptop? <em>*</em></span>
+        <div class="choice-grid two-col">
+          <label class="choice"><input type="radio" name="hasLaptop" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="hasLaptop" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Do you have access to a smartphone? <em>*</em></span>
+        <div class="choice-grid two-col">
+          <label class="choice"><input type="radio" name="hasSmartphone" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="hasSmartphone" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">How would you rate your internet access? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="internetRating" value="Excellent" required><span>Excellent</span></label>
+          <label class="choice"><input type="radio" name="internetRating" value="Good"><span>Good</span></label>
+          <label class="choice"><input type="radio" name="internetRating" value="Fair"><span>Fair</span></label>
+          <label class="choice"><input type="radio" name="internetRating" value="Poor"><span>Poor</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Which AI tools have you used before? <em>*</em></span>
+        <div class="choice-grid" id="aiToolsGrid">
+          <label class="choice"><input type="checkbox" name="aiTools" value="ChatGPT"><span>ChatGPT</span></label>
+          <label class="choice"><input type="checkbox" name="aiTools" value="Claude"><span>Claude</span></label>
+          <label class="choice"><input type="checkbox" name="aiTools" value="Gemini"><span>Gemini</span></label>
+          <label class="choice"><input type="checkbox" name="aiTools" value="None"><span>None</span></label>
+          <label class="choice"><input type="checkbox" name="aiTools" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- STEP 6 — Commitment -->
+    <fieldset class="step" data-step="6">
+      <p class="step-eyebrow">06 · Commitment</p>
+      <h2 class="step-title">The fire needs tending.</h2>
+
+      <div class="field">
+        <span class="field-label">Can you commit to participating actively for 4 weeks? <em>*</em></span>
+        <div class="choice-grid two-col">
+          <label class="choice"><input type="radio" name="canCommit4Weeks" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="canCommit4Weeks" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">How many hours per week can you dedicate to learning? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="hoursPerWeek" value="1–2 Hours" required><span>1–2 Hours</span></label>
+          <label class="choice"><input type="radio" name="hoursPerWeek" value="3–5 Hours"><span>3–5 Hours</span></label>
+          <label class="choice"><input type="radio" name="hoursPerWeek" value="6–10 Hours"><span>6–10 Hours</span></label>
+          <label class="choice"><input type="radio" name="hoursPerWeek" value="10+ Hours"><span>10+ Hours</span></label>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="field-label">What would make this program successful for you? <em>*</em></span>
+        <textarea name="successDefinition" required rows="4"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- STEP 7 — Future Opportunities -->
+    <fieldset class="step" data-step="7">
+      <p class="step-eyebrow">07 · Future Opportunities</p>
+      <h2 class="step-title">Looking past the four weeks.</h2>
+
+      <div class="field">
+        <span class="field-label">Which would be most valuable to you? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="checkbox" name="valuable" value="Portfolio Projects"><span>Portfolio Projects</span></label>
+          <label class="choice"><input type="checkbox" name="valuable" value="Mentorship"><span>Mentorship</span></label>
+          <label class="choice"><input type="checkbox" name="valuable" value="Certificates"><span>Certificates</span></label>
+          <label class="choice"><input type="checkbox" name="valuable" value="Career Guidance"><span>Career Guidance</span></label>
+          <label class="choice"><input type="checkbox" name="valuable" value="Internship Opportunities"><span>Internship Opportunities</span></label>
+          <label class="choice"><input type="checkbox" name="valuable" value="Community & Networking"><span>Community &amp; Networking</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Would you be interested in advanced Mastery Classes after completing Foundations? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="masteryInterest" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="masteryInterest" value="No"><span>No</span></label>
+          <label class="choice"><input type="radio" name="masteryInterest" value="Maybe"><span>Maybe</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">Which mastery track would interest you most? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="masteryTrack" value="Product Design" required><span>Product Design</span></label>
+          <label class="choice"><input type="radio" name="masteryTrack" value="AI & Prompt Engineering"><span>AI &amp; Prompt Engineering</span></label>
+          <label class="choice"><input type="radio" name="masteryTrack" value="Software Development"><span>Software Development</span></label>
+          <label class="choice"><input type="radio" name="masteryTrack" value="Content Creation"><span>Content Creation</span></label>
+          <label class="choice"><input type="radio" name="masteryTrack" value="Entrepreneurship"><span>Entrepreneurship</span></label>
+          <label class="choice"><input type="radio" name="masteryTrack" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">If scholarships were available for advanced programs, would you apply? <em>*</em></span>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="scholarshipApply" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="scholarshipApply" value="No"><span>No</span></label>
+          <label class="choice"><input type="radio" name="scholarshipApply" value="Maybe"><span>Maybe</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- STEP 8 — Final Question -->
+    <fieldset class="step" data-step="8">
+      <p class="step-eyebrow">08 · Final Question</p>
+      <h2 class="step-title">Make your case.</h2>
+
+      <label class="field">
+        <span class="field-label">Why should we select you for the next Kitoko Hearth cohort? <em>*</em></span>
+        <textarea name="whySelectYou" required rows="7" placeholder="This is your moment — be honest, be specific."></textarea>
+      </label>
+    </fieldset>
+
+    <!-- STEP 9 — Review & Submit -->
+    <fieldset class="step" data-step="9">
+      <p class="step-eyebrow">09 · Review</p>
+      <h2 class="step-title">Ready to light it.</h2>
+      <p class="review-copy">You're about to submit your registration for the Kitoko Hearth cohort. Double-check your contact details below — that's how we'll reach you.</p>
+      <div class="review-card" id="reviewCard"></div>
+    </fieldset>
+
+    <!-- nav -->
+    <div class="form-nav">
+      <button type="button" class="btn-ghost" id="backBtn">← Back</button>
+      <button type="button" class="btn-primary" id="nextBtn">Continue <span class="arrow">→</span></button>
+      <button type="submit" class="btn-primary" id="submitBtn" hidden>Submit Registration <span class="arrow">🔥</span></button>
+    </div>
+
+    <p class="error-msg" id="errorMsg" hidden>Please fill in the required field before continuing.</p>
+  </form>
+</section>
+
+<!-- ============ SUCCESS SCREEN ============ -->
+<section class="success" id="successScreen" hidden>
+  <div class="intro-mark">
+    <svg viewBox="0 0 60 60" class="flame-icon lit">
+      <path d="M30 4C26 16 14 20 14 36C14 47 21 56 30 56C39 56 46 47 46 36C46 28 42 24 39 20C39 28 34 30 32 26C30 22 33 16 30 4Z" />
+    </svg>
+  </div>
+  <p class="eyebrow">You're in the circle</p>
+  <h1 class="intro-title">Your spot by the<br>hearth is saved.</h1>
+  <p class="intro-copy">Thank you for registering. We'll reach out on WhatsApp or email with next steps before the cohort begins. Keep an eye on your inbox.</p>
+  <a class="btn-primary" id="whatsappBtn" href="https://wa.me/2348000000000" target="_blank" rel="noopener">Join our WhatsApp Community <span class="arrow">→</span></a>
+</section>
+
+<div class="loading-overlay" id="loadingOverlay" hidden>
+  <div class="ember-spinner"></div>
+  <p>Carrying your registration to the hearth…</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
